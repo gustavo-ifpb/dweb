@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
 
@@ -95,14 +96,28 @@ class Movie(models.Model):
 
 class Evaluation(models.Model):
 
-    note = models.IntegerField(verbose_name='Nota do Filme')
+    rating = models.IntegerField(verbose_name='Nota do Filme')
     comment = models.TextField(max_length=200, verbose_name="Comentário")
     date = models.DateTimeField(auto_now = True, verbose_name="Data da Publicação")
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Filme', related_name='evaluetions')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Usuário', related_name='evaluetions')
 
     def __str__(self):
-        return self.name
+        return f'{self.user.first_name} - {self.movie.name} - {self.comment}'
 
     class Meta:
         verbose_name = 'Avaliação'
         verbose_name_plural = 'Avaliações'
+
+class Cast(models.Model):
+
+    name = models.CharField(max_length = 100, verbose_name='Nome do Personagem')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Filme', related_name='filme')
+    actor = models.ForeignKey(Actor, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Ator', related_name='ator')
+
+    def __str__(self):
+        return f'{self.name} ({self.actor.name})'
+
+    class Meta:
+        verbose_name = 'Elenco'
+        verbose_name_plural = 'Elencos'

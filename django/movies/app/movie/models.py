@@ -116,7 +116,7 @@ class Cast(models.Model):
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Ator', related_name='ator')
 
     def __str__(self):
-        return f'{self.name} ({self.actor.name})'
+        return '%s (%s)' % (self.name, self.actor.name)
 
     class Meta:
         verbose_name = 'Elenco'

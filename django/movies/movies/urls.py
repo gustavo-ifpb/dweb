@@ -21,6 +21,9 @@ from app.movie import views as movie
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('category/new/', movie.CategoryCreateView.as_view(), name='category-create'),
+
     path('movies/', movie.MovieListView.as_view(), name='movie-list'),
+    path('movies/new/', movie.MovieCreateView.as_view(), name='movie-create'),
     path('movies/<int:pk>/', movie.MovieDetailView.as_view(), name='movie-detail'),
 ]

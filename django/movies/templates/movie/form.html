@@ -3,14 +3,14 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Movies</title>
+    <title>Novo filme</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    <ul>
-        {% for movie in object_list %}
-        <li><a href="{% url 'movie-detail' movie.pk %}">{{ movie.name }} - {{ movie.classification }}</a></li>
-        {% endfor %}
-    </ul>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Salvar">
+    </form>
 </body>
 </html>

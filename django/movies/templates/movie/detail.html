@@ -7,6 +7,12 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    Nome do Filme: {{ object.name }}
+    <b>Nome do Filme:</b> {{ object.name }}<br/>
+    <b>Categorias:</b>
+    {% for category in object.categories.all %}
+    <br/>{{ category.name }}
+    {% endfor %}
+    <br/><b>Sinopse:</b><br/>
+    {{ object.synopsis }}
 </body>
 </html>
